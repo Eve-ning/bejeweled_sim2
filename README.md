@@ -1,2 +1,6 @@
-# bejeweled_sim2
- java of bejeweled_sim (in python)
+# Bejeweled Simulator
+## [As Python](https://github.com/Eve-ning/bejeweled_sim)
+
+## Documentation
+
+All Documentation can be found on the Python GitHub.
