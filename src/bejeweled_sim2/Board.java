@@ -98,7 +98,7 @@ public class Board {
 	// Fall Cells down once
 	// Optimize limit is to hasten the search by decreasing the number of
 	// rows checked
-	public boolean fallCells(int optimize_limit) {
+	public boolean fallCells(int delay_ms, int optimize_limit) {
 		assert optimize_limit >= 0: "Optimizing cannot be less than 0";
 		
 		// The flag indicates if there is fall movement
@@ -111,13 +111,22 @@ public class Board {
 					setColor(r+1, c, getColor(r, c));
 					setColor(r,   c, COLOR.EMPTY);
 					flag = true;
+					if (delay_ms > 0) {
+						try { Thread.sleep(delay_ms); }
+						catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
 				}
 			}
 		}
 		return flag;
 	}
+	public boolean fallCells(int delay_ms) {
+		return fallCells(delay_ms, 0);
+	}
 	public boolean fallCells() {
-		return fallCells(0);
+		return fallCells(0, 0);
 	}
 	
 	

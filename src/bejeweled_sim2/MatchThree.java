@@ -21,7 +21,10 @@ public class MatchThree {
 	static Dimension DIM_BOARD  = new Dimension(800, 800);
 	static Dimension DIM_UI     = new Dimension(DIM_BOARD.width, 200);
 	static Dimension DIM_WINDOW = new Dimension(DIM_BOARD.width,
-											   DIM_BOARD.height + DIM_UI.height);
+											    DIM_BOARD.height + DIM_UI.height);
+	
+	final int DELAY_FALL = 2;
+	final int DELAY_MATCH = 500;
 	
 	ActionListener ac_fall;
 	ActionListener ac_fill;	
@@ -58,14 +61,14 @@ public class MatchThree {
 					@Override
 					protected String doInBackground() throws Exception {
 						int op_fall = 0;
-						while (board.fallCells(op_fall)) { op_fall++; }
-						board.markCells(3);
-//						Thread.sleep(MATCH_DELAY);
-						System.out.println(board.clearMarkedCells());
+						while (board.fallCells(DELAY_FALL, op_fall)) { op_fall++; }
+						Thread.sleep(DELAY_MATCH);
 						return null;
 					}
 					@Override
 					protected void done() { 
+						board.markCells(3);
+						System.out.println(board.clearMarkedCells());
 
 						// fillCells();
 						// randomizeCells();
@@ -110,7 +113,7 @@ public class MatchThree {
 	}
 	
 	public static void main(String[] args) {
-		new MatchThree(150, 150);
+		new MatchThree(25, 25);
 	}
 	
 	

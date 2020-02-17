@@ -63,6 +63,7 @@ public class Cell extends JButton {
 		color_ = color;
 		updateColor();
 		mark_ = false;
+		setBorderPainted(false);
 	}
 	public Cell() {
 		this(COLOR.EMPTY);
