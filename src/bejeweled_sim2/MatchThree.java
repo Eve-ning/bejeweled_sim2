@@ -24,11 +24,14 @@ public class MatchThree {
 											    DIM_BOARD.height + DIM_UI.height);
 	
 	final int DELAY_FALL = 2;
+	final int DELAY_FILL = 1;
+	final int DELAY_RAND = 2;
 	final int DELAY_MATCH = 500;
 	
-	ActionListener ac_fall;
-	ActionListener ac_fill;	
-	ActionListener ac_randomize;
+	ActionListener al_fall;
+	ActionListener al_fill;	
+	ActionListener al_rand;
+	ActionListener al_mtch;
 	
 	MatchThree(int rows, int cols) {
 		board = new Board(rows, cols);
@@ -37,7 +40,6 @@ public class MatchThree {
 		initFrame();
 		initActionListeners();
 		initPanels();
-		
 		
 		// Refresh Frame
 		frame.revalidate();
@@ -53,58 +55,85 @@ public class MatchThree {
 	}
 	// Initialize ActionListeners
 	public void initActionListeners() {
-		ac_fall = new ActionListener() {
+		al_fall = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// Add Swing worker to update board on fall
 				SwingWorker<String, Object> worker = new SwingWorker<String, Object>() {
 					@Override
 					protected String doInBackground() throws Exception {
-						int op_fall = 0;
-						while (board.fallCells(DELAY_FALL, op_fall)) { op_fall++; }
+						board.fallCellsAll(DELAY_FALL);
 						Thread.sleep(DELAY_MATCH);
 						return null;
 					}
 					@Override
-					protected void done() { 
-						board.markCells(3);
-						System.out.println(board.clearMarkedCells());
-
-						// fillCells();
-						// randomizeCells();
-						super.done();
-						}
+					protected void done() { super.done(); }
 				};
 				worker.execute();
 			}
 		};
-		ac_fill = new ActionListener() {
+		al_fill = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				board.fillCells();
+				// Add Swing worker to update board on fall
+				SwingWorker<String, Object> worker = new SwingWorker<String, Object>() {
+					@Override
+					protected String doInBackground() {
+						board.fillCells(DELAY_FILL);
+						return null;
+					}
+					@Override
+					protected void done() {	}
+				};
+				worker.execute();
 			}
 		};
-		ac_randomize = new ActionListener() {
+		al_rand = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				board.randomizeCells();
+				// Add Swing worker to update board on fall
+				SwingWorker<String, Object> worker = new SwingWorker<String, Object>() {
+					@Override
+					protected String doInBackground() {
+						board.randomizeCells(DELAY_FILL);
+						return null;
+					}
+					@Override
+					protected void done() { super.done(); }
+				};
+				worker.execute();
+			}
+		};
+		al_mtch = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Add Swing worker to update board on fall
+				SwingWorker<String, Object> worker = new SwingWorker<String, Object>() {
+					@Override
+					protected String doInBackground() {
+						board.markCells(3);
+						System.out.println(board.clearMarkedCells());
+						return null;
+					}
+					@Override
+					protected void done() { super.done(); }
+				};
+				worker.execute();
 			}
 		};
 
-		ui.setALFall(ac_fall);
-		ui.setALFill(ac_fill);
-		ui.setALRand(ac_randomize);
+		ui.setALFall(al_fall);
+		ui.setALFill(al_fill);
+		ui.setALRand(al_rand);
+		ui.setALMatch(al_mtch);
 	}
 	// Initialize Panels and add to Frame
 	public void initPanels() {
 		panel_frame = new JPanel() {
 			private static final long serialVersionUID = -7838137756337687463L;
 			@Override
-			public Dimension getPreferredSize() {
-				return DIM_WINDOW;
-			}
+			public Dimension getPreferredSize() { return DIM_WINDOW; }
+			
 		};
 		
 		panel_frame.add(board.panel_board);
@@ -113,7 +142,7 @@ public class MatchThree {
 	}
 	
 	public static void main(String[] args) {
-		new MatchThree(25, 25);
+		new MatchThree(100, 100);
 	}
 	
 	

@@ -74,27 +74,46 @@ public class Board {
 	}
 
 	// Randomize colors in Cells
-	public void randomizeCells() {
+	public void randomizeCells(int delay_ms) {
 		Random rand = new Random();
 		// rand.setSeed(10000);
 		for (ArrayList<Cell> r : cells) {
 			for (Cell c : r) {
 				c.setColor(rand.nextInt(Cell.COLOR.COUNT));
+				if (delay_ms > 0) {
+					try { Thread.sleep(delay_ms); }
+					catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	}
+	public void randomizeCells() {
+		randomizeCells(0);
+	}
 	
 	// Fill Empty Cells
-	public void fillCells() {
+	public void fillCells(int delay_ms) {
 		Random rand = new Random();
 		for (ArrayList<Cell> r : cells) {
 			for (Cell c : r) {
 				if (c.getColor() == Cell.COLOR.EMPTY)
 					// -1 to avoid empty
 					c.setColor(rand.nextInt(Cell.COLOR.COUNT - 1));
+					if (delay_ms > 0) {
+						try { Thread.sleep(delay_ms); }
+						catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
 			}
 		}
 	}
+	public void fillCells() {
+		fillCells(0);
+	}
+	
 	// Fall Cells down once
 	// Optimize limit is to hasten the search by decreasing the number of
 	// rows checked
@@ -127,6 +146,13 @@ public class Board {
 	}
 	public boolean fallCells() {
 		return fallCells(0, 0);
+	}
+	public void fallCellsAll(int delay_ms) {
+		int op_fall = 0;
+		while (fallCells(delay_ms, op_fall)) { op_fall++; }
+	}
+	public void fallCellsAll() {
+		fallCellsAll(0);
 	}
 	
 	

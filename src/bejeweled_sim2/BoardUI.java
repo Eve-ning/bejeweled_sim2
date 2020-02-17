@@ -13,9 +13,11 @@ public class BoardUI {
 	private ActionListener al_fall;
 	private ActionListener al_fill;	
 	private ActionListener al_rand;
+	private ActionListener al_mtch;
 	JButton btn_fall;
 	JButton btn_fill;
 	JButton btn_rand;
+	JButton btn_mtch;
 	
 	BoardUI() {
 		initPanel();
@@ -36,28 +38,36 @@ public class BoardUI {
 		btn_rand.removeAll();
 		btn_rand.addActionListener(al_rand);
 	}
+	public void setALMatch(ActionListener al) {
+		al_mtch = al;
+		btn_mtch.removeAll();
+		btn_mtch.addActionListener(al_mtch);
+	}
 	
 	// Initialize ActionListeners
 	public void initActionListeners() {
 		al_fall = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				throw new UnsupportedOperationException(
-						"AL not implemented");
+				throw new UnsupportedOperationException("AL not implemented");
 			}
 		};
 		al_fill = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				throw new UnsupportedOperationException(
-						"AL not implemented");
+				throw new UnsupportedOperationException("AL not implemented");
 			}
 		};
 		al_rand = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				throw new UnsupportedOperationException(
-						"AL not implemented");
+				throw new UnsupportedOperationException("AL not implemented");
+			}
+		};
+		al_mtch = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				throw new UnsupportedOperationException("AL not implemented");
 			}
 		};
 	}
@@ -68,6 +78,7 @@ public class BoardUI {
 		panel_ui.add(btn_fall);
 		panel_ui.add(btn_fill);
 		panel_ui.add(btn_rand);
+		panel_ui.add(btn_mtch);
 	}
 	
 	// Initialize Buttons
@@ -75,6 +86,7 @@ public class BoardUI {
 		btn_fall = new JButton("Fall");
 		btn_fill = new JButton("Fill");
 		btn_rand = new JButton("Randomize");
+		btn_mtch = new JButton("Match");
 	}
 	
 	

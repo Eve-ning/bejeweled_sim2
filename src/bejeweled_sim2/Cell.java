@@ -69,14 +69,14 @@ public class Cell extends JButton {
 		this(COLOR.EMPTY);
 	}
 	
-	public void setColor(COLOR color)  { color_ = color; updateColor(); }
-	public void setColor(int color_i)  { color_ = COLOR.fromInt(color_i); updateColor(); }
-	public COLOR getColor() { return color_; }
-	public int asInt() { return color_.asInt(); }
+	public void  setColor(COLOR color)  { color_ = color; updateColor(); }
+	public void  setColor(int color_i)  { color_ = COLOR.fromInt(color_i); updateColor(); }
+	public COLOR getColor() 			{ return color_; }
+	public int   asInt() 				{ return color_.asInt(); }
 	
 	public boolean isMarked() { return mark_; }
-	public void mark() 		  { mark_ = true; updateMark();}
-	public void unmark()      { mark_ = false; updateMark();}
+	public void    mark() 	  { mark_ = true; updateMark();}
+	public void    unmark()   { mark_ = false; updateMark();}
 	
 	private void updateMark() { setText(mark_ ? "X" : ""); }
 	
