@@ -23,9 +23,9 @@ public class MatchThree {
 	static Dimension DIM_WINDOW = new Dimension(DIM_BOARD.width,
 											    DIM_BOARD.height + DIM_UI.height);
 	
-	final int DELAY_FALL = 2;
-	final int DELAY_FILL = 1;
-	final int DELAY_RAND = 2;
+	final int DELAY_FALL = 0;
+	final int DELAY_FILL = 0;
+	final int DELAY_RAND = 0;
 	final int DELAY_MATCH = 500;
 	
 	ActionListener al_fall;
